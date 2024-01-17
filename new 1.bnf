@@ -1,0 +1,163 @@
+<program> ::= <progStart> NEWLINE <func> <mainProg>
+			 |<progStart> NEWLINE <mainProg>
+			
+<progStart> ::= "PROGRAM" <identifier>
+
+<func> ::= <funcHeader> "("<parameterList>")" NEWLINE <funcBody> <funcEnd>
+		  |<funcHeader> "("<parameterList>")" NEWLINE <funcBody> <funcEnd> NEWLINE
+
+<funcHeader> ::= "FUNCTION" <identifier>
+
+<parameterList> ::= <parameterDeclaration>
+				   |<parameterList> "," <parameterDeclaration>
+
+<parameterDeclaration> ::= <type> <identifier>
+
+<type> ::= "CHAR"
+          | "INTEGER"
+
+<funcBody> ::= "VARS" <varDeclaration> <commandList> 
+			  |"VARS" NEWLINE <varDeclaration> <commandList> 
+			  | <commandList>
+
+<varDeclaration> ::= <type> <varList> ";"
+					|<type> <varList> ";" NEWLINE
+					| <varDeclaration> <type> <varList> ";"
+
+<varList> ::= <arrayIdentifier>
+			 | <identifier>
+			 | <varList> "," <arrayIdentifier>
+			 | <varList> "," <identifier> 
+		 		 
+<funcEnd> ::= "RETURN" <variable> ";" "END_FUNCTION" 
+			 | "RETURN" <variable> ";" NEWLINE "END_FUNCTION"
+			 | "RETURN" <string> ";" "END_FUNCTION"
+			 | "RETURN" <string> ";" NEWLINE "END_FUNCTION"
+			 
+<mainProg> ::= "STARTMAIN" <mainBody> "ENDMAIN"
+			  | "STARTMAIN" NEWLINE <mainBody> "ENDMAIN"
+
+<mainBody> ::= "VARS" <varDeclaration> <commandList>
+			  | "VARS" NEWLINE <varDeclaration> <commandList>
+              | <commandList>
+
+<commandList> ::= <commands>
+				 | <commands> NEWLINE	
+				 | <commandList> <commands> NEWLINE
+				 
+<commands> ::= <assignmentStatement>
+			  | <controlStatement>
+			  | <loopStatement>
+			  | <print>
+			  | <break>
+
+<assignmentStatement> ::= <variable> "=" <expression> ";"
+
+<expression> ::= <term> 
+				| <expression> "+" <term> 
+				| <expression> "-" <term>
+				
+<term> ::= <primary>
+		  | <term> "*" <primary> 
+    	  | <term> "/" <primary>
+		  | <term> "^" <primary>
+		  
+<primary> ::= <variable>
+			 | <number> 
+			 | "("<expression>")"
+			
+<loopStatement> ::= <whileStatement> | <forStatement>
+
+<whileStatement> ::= "WHILE" "(" <condition> ")" NEWLINE <commandList> "ENDWHILE"
+
+<condition> ::= <simpleCondition> 
+			   | <condition> "AND" <simpleCondition>
+			   | <condition> "OR" <simpleCondition>
+
+<simpleCondition> ::= <variable> <logOperator> <number>
+					 | <variable> <logOperator> <variable>
+					 | <number> <logOperator> <number>
+					 | <number> <logOperator> <variable>
+
+<logOperator> ::= ">"
+				 | "<"
+				 | "=="
+				 | "!=" 
+
+<forStatement> ::= "FOR" <variable> ":=" <number> "TO" <number> "STEP" <number> NEWLINE <commandList> "ENDFOR"
+
+
+
+<controlStatement> ::= <ifStatement>
+					  | <switchStatement>
+			
+<ifStatement> ::= <ifThen> <commandList> "ENDIF"
+				 | <ifThen> <commandList> "ELSE" NEWLINE <commandList> "ENDIF"
+				 | <ifThen> <commandList> <elifSt> "ENDIF"
+				 | <ifThen> <commandList> <elifSt> "ELSE" NEWLINE <commandList> "ENDIF"
+
+<ifThen> ::= "IF" "(" <condition> ")" "THEN" NEWLINE
+				 
+<elifSt> ::= "ELSEIF" "(" <condition> ")" "THEN" NEWLINE <commandList>
+			| <elifSt> "ELSEIF" "(" <condition> ")" "THEN" NEWLINE <commandList>
+
+<switchStatement> ::= "SWITCH" "(" <expression> ")" NEWLINE <cases> "ENDSWITCH"
+					 | "SWITCH" "(" <expression> ")" NEWLINE <cases> "DEFAULT:" NEWLINE <commandList> "ENDSWITCH"
+					 
+<cases> ::= "CASE" "(" <expression> "):" NEWLINE <commandList>
+		   | <cases> "CASE" "(" <expression> "):" NEWLINE <commandList>
+		   
+<print> ::= "PRINT" "(" <string> ")" ";" 
+		   | "PRINT" "(" <string>  "," <varList> ")" ";"
+		   
+<break> ::= "BREAK;"
+
+
+<variable>  ::= <identifier>				 
+			 
+<identifier> ::=<letter> 
+		  |"_"
+		  |<name><letter>
+		  |<name><number>
+		  |<name>"_"
+		  
+<string> ::= <stringChars>
+			|<string><stringChars>
+			
+<stringChars> ::= <letter>
+				 | <number>
+				 | <specialChars>
+
+
+	
+
+<letter> ::= a|b|c|d|e|f|g|h|i|j|k|l|m|n|o|p|q|r|s|t|u|v|w|x|y|z
+			|A|B|C|D|E|F|G|H|I|J|K|L|M|N|O|P|Q|R|S|T|U|V|W|X|Y|Z
+			
+<number> ::= <digit>
+			|<number><digit>
+		   
+<digit> ::= 0|1|2|3|4|5|6|7|8|9
+
+<specialChars> ::= ~|!|@|#|$|%|^|&|*|(|)|_|+|-|=|[|{|]|}\|/?\|
+		   
+		   
+		   
+
+			 
+			 
+
+			 
+
+
+
+
+
+
+
+
+
+
+
+
+

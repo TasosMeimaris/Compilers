@@ -1,0 +1,28 @@
+PROGRAM test1 
+FUNCTION add(INTEGER x,INTEGER y) 
+VARS 
+ INTEGER num1[10];
+ PRINT("result of function:"); 
+RETURN "23"; 
+END_FUNCTION
+STARTMAIN
+   num1=5; 
+    num2=3; 
+    ΑΣΔΑΣδΑΣΔΣ
+    %DASDSfunction
+    num3=num1+(num2*2);
+    PRINT("fefe");
+    IF (1==2) THEN
+    PRINT("result of function:"); 
+    ELSE
+    PRINT("result of DASDSfunction:");
+    %sdfadfasdgd
+ ENDIF
+    FOR count:=1 TO 5 STEP 1
+     PRINT("IN FOR LOOP ,COUNT= ",count);
+    ENDFOR 
+    WHILE (X==Y) 
+    num2=3; 
+    ENDWHILE
+    PRINT("result of function:");
+ENDMAIN
